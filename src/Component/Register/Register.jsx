@@ -5,7 +5,7 @@ import { AuthContext } from '../Provaider/AuthProvaiders';
 
 
 const Register = () => {
-      const {user, creatUser}=useContext(AuthContext)
+      const {user, creatUser, signWithGoogle}=useContext(AuthContext)
    console.log(creatUser);
 
       const handleRegisfrom=(event)=>{ 
@@ -28,6 +28,18 @@ const Register = () => {
           })
 
       }
+
+   const handleGoogleSignIn=()=>{
+        signWithGoogle()
+        .then(result=>{
+          const logedGoogle=result.user
+          console.log(logedGoogle);
+        })
+        .catch(error=>{
+          console.log(error);
+        })
+   }   
+     
 
 
 
@@ -64,6 +76,7 @@ const Register = () => {
         </div>
         <div className="form-control mt-6">
           <button className="btn btn-primary">Register Now</button>
+          <button onClick={handleGoogleSignIn} className="btn btn-primary mt-5"> login With Google</button>
         </div>
       </form>
       <Link to="/login"><button className="btn pl-8 btn-active btn-link">Login Now </button></Link>
