@@ -5,15 +5,28 @@ import { AuthContext } from '../Provaider/AuthProvaiders';
 
 
 const Register = () => {
-      const user=useContext(AuthContext)
- console.log(user);
-      const handleRegisfrom=(event)=>{
+      const {user, creatUser}=useContext(AuthContext)
+   console.log(creatUser);
+
+      const handleRegisfrom=(event)=>{ 
           event.preventDefault();
           const from=event.target;
           const name=from.name.value;   
           const email=from.email.value;
           const password= from.password.value;
           console.log(email, name, password);
+
+
+          creatUser(email, password)
+          .then(result=>{
+            const logedUser=result.user;
+            console.log(logedUser);
+            from.reset()
+          })
+          .catch(error=>{
+             console.log(error);
+          })
+
       }
 
 
